@@ -1,7 +1,7 @@
 package wrappers
 
 import (
-	"github.com/aurorachat/auth/auth"
+	"github.com/aurorachat/jwt-tokens/auth"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"

@@ -1,4 +1,4 @@
-module github.com/aurorachat/auth
+module github.com/aurorachat/jwt-tokens
 
 go 1.22.5
 
