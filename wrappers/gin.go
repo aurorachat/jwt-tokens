@@ -1,7 +1,7 @@
 package wrappers
 
 import (
-	"github.com/aurorachat/jwt-tokens/auth"
+	"github.com/aurorachat/jwt-tokens/tokens"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
@@ -22,7 +22,7 @@ func GinProtectedRoute() gin.HandlerFunc {
 			return
 		}
 
-		claims, err := auth.GetJWTClaims(authToken)
+		claims, err := tokens.GetJWTClaims(authToken)
 
 		if err != nil {
 			c.AbortWithStatus(http.StatusUnauthorized)
