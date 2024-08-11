@@ -4,7 +4,6 @@ import (
 	"github.com/aurorachat/jwt-tokens/tokens"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strings"
 )
 
 func GinProtectedRoute() gin.HandlerFunc {
@@ -15,14 +14,7 @@ func GinProtectedRoute() gin.HandlerFunc {
 			return
 		}
 
-		authToken, found := strings.CutPrefix(authToken, "Bearer ")
-
-		if !found {
-			c.AbortWithStatus(http.StatusUnauthorized)
-			return
-		}
-
-		claims, err := tokens.GetJWTClaims(authToken)
+		claims, err := tokens.ValidateToken(authToken)
 
 		if err != nil {
 			c.AbortWithStatus(http.StatusUnauthorized)

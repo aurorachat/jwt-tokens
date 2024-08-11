@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/golang-jwt/jwt/v5"
+	"strings"
 )
 
 var secretToken []byte
@@ -40,4 +41,16 @@ func CreateJWT(claims jwt.MapClaims) (string, error) {
 		return "", err
 	}
 	return tokenString, nil
+}
+
+func ValidateToken(token string) (*jwt.MapClaims, error) {
+	resultToken, found := strings.CutPrefix(token, "Bearer ")
+	if !found {
+		return nil, errors.New("invalid token")
+	}
+	claims, err := GetJWTClaims(resultToken)
+	if err != nil {
+		return nil, err
+	}
+	return &claims, nil
 }
